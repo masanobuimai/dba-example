@@ -1,0 +1,1 @@
+select country_iso_code, country, region from countries

@@ -1,0 +1,38 @@
+plugins {
+  id 'org.springframework.boot' version '2.4.5'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '16'
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  set('testcontainersVersion', "1.15.3")
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-web:2.4.5'
+  implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.4.5'
+  developmentOnly 'org.springframework.boot:spring-boot-devtools'
+  runtimeOnly 'org.postgresql:postgresql'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.testcontainers:junit-jupiter'
+  implementation 'org.jdbi:jdbi3-spring5:3.20.0'
+  implementation 'org.jdbi:jdbi3-sqlobject:3.20.0'
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+  }
+}
+
+test {
+  useJUnitPlatform()
+}

@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: PostgreSQL.dockerfile
+    container_name: "sample-db"
+    volumes:
+      - sample_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sample_local
+volumes:
+  sample_data:
+    driver: local
